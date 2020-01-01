@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  iOS_Charts
+//
+//  Created by gwl on 2019/12/31.
+//  Copyright © 2019 gwl. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "iOS_Charts-Bridging-Header.h"
+#import <Charts-Swift.h>
+//#import <ChartsRealm-Swift.h>
+
+#endif /* PrefixHeader_pch */
