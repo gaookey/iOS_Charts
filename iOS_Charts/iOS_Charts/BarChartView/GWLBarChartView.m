@@ -143,7 +143,7 @@
     //xAxis.spaceMin = 1.5;
     //x轴显示数量，默认6。由setVisibleXRangeMaximum替代
     if (self.titles.count > self.visibleXRangeMaximum) {
-        xAxis.labelCount = 6;
+        xAxis.labelCount = self.visibleXRangeMaximum;
     } else {
         xAxis.labelCount = self.titles.count;
     }
@@ -211,7 +211,8 @@
     //set
     BarChartDataSet *set = [[BarChartDataSet alloc] initWithEntries:array];
     set.label = @"图例";
-    [set setColor:[UIColor blackColor]];
+    //圆柱颜色
+    [set setColor:[UIColor cyanColor]];
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
     setFormatter.positiveSuffix = @"%";
     [set setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:setFormatter]];
@@ -239,7 +240,7 @@
     //[self.barChartView notifyDataSetChanged];
     //[self.barChartView.data notifyDataChanged];
     if (self.titles.count > self.visibleXRangeMaximum) {
-        [self.barChartView setVisibleXRangeMaximum:6];
+        [self.barChartView setVisibleXRangeMaximum:self.visibleXRangeMaximum];
     }
 }
 #pragma mark - 多层
@@ -285,7 +286,7 @@
     self.barChartView.data = data;
     
     if (self.titles.count > self.visibleXRangeMaximum) {
-        [self.barChartView setVisibleXRangeMaximum:6];
+        [self.barChartView setVisibleXRangeMaximum:self.visibleXRangeMaximum];
     }
 }
 #pragma mark - IChartAxisValueFormatter
