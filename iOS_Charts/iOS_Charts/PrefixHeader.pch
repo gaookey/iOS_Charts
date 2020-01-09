@@ -2,15 +2,26 @@
 //  PrefixHeader.pch
 //  iOS_Charts
 //
-//  Created by gwl on 2019/12/31.
-//  Copyright © 2019 gwl. All rights reserved.
+//  Created by gwl on 2020/1/9.
+//  Copyright © 2020 gwl. All rights reserved.
 //
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "iOS_Charts-Bridging-Header.h"
+#define SCREEN_WIDTH         [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT        [[UIScreen mainScreen] bounds].size.height
+
+// 状态栏高度
+#define STATUSBAR_HEIGHT     [[UIApplication sharedApplication] statusBarFrame].size.height
+// 导航栏高度
+#define NAVBAR_HEIGHT        44.0
+// 状态栏+导航栏高度
+#define NAV_HEIGHT           (STATUSBAR_HEIGHT + NAVBAR_HEIGHT)
+// tabBar高度
+#define TABBAR_HEIGHT        (STATUSBAR_HEIGHT > 20.0 ? 83.0 : 49.0)
+#define TABBAR_BOTTOM_HEIGHT (STATUSBAR_HEIGHT > 20.0 ? 34.0 : 0)
+
 #import <Charts-Swift.h>
-//#import <ChartsRealm-Swift.h>
 
 #endif /* PrefixHeader_pch */

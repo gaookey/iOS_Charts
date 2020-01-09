@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		CAD3D9238BE26E662F33FCF7 /* Pods_iOS_Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABB4E2D0917D6099BCAC47B /* Pods_iOS_Charts.framework */; };
+		E8404E3B23C5D1E2002A243E /* GWLCombinedChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E3A23C5D1E2002A243E /* GWLCombinedChartViewController.m */; };
+		E8404E3E23C5D1EF002A243E /* GWLBubbleChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E3D23C5D1EF002A243E /* GWLBubbleChartViewController.m */; };
+		E8404E4123C5D1F8002A243E /* GWLPieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4023C5D1F8002A243E /* GWLPieChartViewController.m */; };
+		E8404E4423C5D200002A243E /* GWLRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4323C5D200002A243E /* GWLRadarChartViewController.m */; };
+		E8404E4723C5D20A002A243E /* GWLCandleStickChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4623C5D20A002A243E /* GWLCandleStickChartViewController.m */; };
+		E8404E4A23C5D213002A243E /* GWLScatterChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4923C5D213002A243E /* GWLScatterChartViewController.m */; };
+		E8404E4D23C5D21D002A243E /* GWLBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4C23C5D21D002A243E /* GWLBarChartViewController.m */; };
+		E8404E5023C5D227002A243E /* GWLLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8404E4F23C5D227002A243E /* GWLLineChartViewController.m */; };
 		E87313EA23BB16AE00562743 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E87313E923BB16AE00562743 /* AppDelegate.m */; };
 		E87313ED23BB16AE00562743 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E87313EC23BB16AE00562743 /* SceneDelegate.m */; };
 		E87313F023BB16AE00562743 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E87313EF23BB16AE00562743 /* ViewController.m */; };
@@ -17,16 +25,6 @@
 		E87313FB23BB16B000562743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E87313FA23BB16B000562743 /* main.m */; };
 		E873140523BB16B000562743 /* iOS_ChartsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E873140423BB16B000562743 /* iOS_ChartsTests.m */; };
 		E873141023BB16B000562743 /* iOS_ChartsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E873140F23BB16B000562743 /* iOS_ChartsUITests.m */; };
-		E873142723BB249500562743 /* GWLLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873142623BB249500562743 /* GWLLineChartView.m */; };
-		E873142B23BB24A900562743 /* GWLBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873142A23BB24A900562743 /* GWLBarChartView.m */; };
-		E873142F23BB24B800562743 /* GWLScatterChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873142E23BB24B800562743 /* GWLScatterChartView.m */; };
-		E873143323BB24C600562743 /* GWLCandleStickChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873143223BB24C600562743 /* GWLCandleStickChartView.m */; };
-		E873143723BB24D500562743 /* GWLRadarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873143623BB24D500562743 /* GWLRadarChartView.m */; };
-		E873143B23BB24E200562743 /* GWLPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873143A23BB24E200562743 /* GWLPieChartView.m */; };
-		E873143F23BB24EE00562743 /* GWLBubbleChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873143E23BB24EE00562743 /* GWLBubbleChartView.m */; };
-		E873144323BB24F900562743 /* GWLHorizontalBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873144223BB24F900562743 /* GWLHorizontalBarChartView.m */; };
-		E873144723BB250600562743 /* GWLCombinedChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = E873144623BB250600562743 /* GWLCombinedChartView.m */; };
-		E873144D23BB2E9D00562743 /* GWLSwiftFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E873144C23BB2E9D00562743 /* GWLSwiftFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +48,23 @@
 		2ABB4E2D0917D6099BCAC47B /* Pods_iOS_Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CE438B9D3621BA2F0A9624 /* Pods-iOS_Charts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_Charts.release.xcconfig"; path = "Target Support Files/Pods-iOS_Charts/Pods-iOS_Charts.release.xcconfig"; sourceTree = "<group>"; };
 		9A112A9C42368B3FA744FE43 /* Pods-iOS_Charts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_Charts.debug.xcconfig"; path = "Target Support Files/Pods-iOS_Charts/Pods-iOS_Charts.debug.xcconfig"; sourceTree = "<group>"; };
+		E8404E3923C5D1E2002A243E /* GWLCombinedChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLCombinedChartViewController.h; sourceTree = "<group>"; };
+		E8404E3A23C5D1E2002A243E /* GWLCombinedChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLCombinedChartViewController.m; sourceTree = "<group>"; };
+		E8404E3C23C5D1EF002A243E /* GWLBubbleChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLBubbleChartViewController.h; sourceTree = "<group>"; };
+		E8404E3D23C5D1EF002A243E /* GWLBubbleChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLBubbleChartViewController.m; sourceTree = "<group>"; };
+		E8404E3F23C5D1F8002A243E /* GWLPieChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLPieChartViewController.h; sourceTree = "<group>"; };
+		E8404E4023C5D1F8002A243E /* GWLPieChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLPieChartViewController.m; sourceTree = "<group>"; };
+		E8404E4223C5D200002A243E /* GWLRadarChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLRadarChartViewController.h; sourceTree = "<group>"; };
+		E8404E4323C5D200002A243E /* GWLRadarChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLRadarChartViewController.m; sourceTree = "<group>"; };
+		E8404E4523C5D20A002A243E /* GWLCandleStickChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLCandleStickChartViewController.h; sourceTree = "<group>"; };
+		E8404E4623C5D20A002A243E /* GWLCandleStickChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLCandleStickChartViewController.m; sourceTree = "<group>"; };
+		E8404E4823C5D213002A243E /* GWLScatterChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLScatterChartViewController.h; sourceTree = "<group>"; };
+		E8404E4923C5D213002A243E /* GWLScatterChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLScatterChartViewController.m; sourceTree = "<group>"; };
+		E8404E4B23C5D21D002A243E /* GWLBarChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLBarChartViewController.h; sourceTree = "<group>"; };
+		E8404E4C23C5D21D002A243E /* GWLBarChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLBarChartViewController.m; sourceTree = "<group>"; };
+		E8404E4E23C5D227002A243E /* GWLLineChartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLLineChartViewController.h; sourceTree = "<group>"; };
+		E8404E4F23C5D227002A243E /* GWLLineChartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLLineChartViewController.m; sourceTree = "<group>"; };
+		E84C905123C6C02400547EE3 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		E87313E523BB16AE00562743 /* iOS_Charts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Charts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E87313E823BB16AE00562743 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E87313E923BB16AE00562743 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -68,27 +83,6 @@
 		E873140B23BB16B000562743 /* iOS_ChartsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_ChartsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E873140F23BB16B000562743 /* iOS_ChartsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_ChartsUITests.m; sourceTree = "<group>"; };
 		E873141123BB16B000562743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E873142323BB1EE800562743 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		E873142523BB249500562743 /* GWLLineChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLLineChartView.h; sourceTree = "<group>"; };
-		E873142623BB249500562743 /* GWLLineChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLLineChartView.m; sourceTree = "<group>"; };
-		E873142923BB24A900562743 /* GWLBarChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLBarChartView.h; sourceTree = "<group>"; };
-		E873142A23BB24A900562743 /* GWLBarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLBarChartView.m; sourceTree = "<group>"; };
-		E873142D23BB24B800562743 /* GWLScatterChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLScatterChartView.h; sourceTree = "<group>"; };
-		E873142E23BB24B800562743 /* GWLScatterChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLScatterChartView.m; sourceTree = "<group>"; };
-		E873143123BB24C600562743 /* GWLCandleStickChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLCandleStickChartView.h; sourceTree = "<group>"; };
-		E873143223BB24C600562743 /* GWLCandleStickChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLCandleStickChartView.m; sourceTree = "<group>"; };
-		E873143523BB24D500562743 /* GWLRadarChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLRadarChartView.h; sourceTree = "<group>"; };
-		E873143623BB24D500562743 /* GWLRadarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLRadarChartView.m; sourceTree = "<group>"; };
-		E873143923BB24E200562743 /* GWLPieChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLPieChartView.h; sourceTree = "<group>"; };
-		E873143A23BB24E200562743 /* GWLPieChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLPieChartView.m; sourceTree = "<group>"; };
-		E873143D23BB24EE00562743 /* GWLBubbleChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLBubbleChartView.h; sourceTree = "<group>"; };
-		E873143E23BB24EE00562743 /* GWLBubbleChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLBubbleChartView.m; sourceTree = "<group>"; };
-		E873144123BB24F900562743 /* GWLHorizontalBarChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLHorizontalBarChartView.h; sourceTree = "<group>"; };
-		E873144223BB24F900562743 /* GWLHorizontalBarChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLHorizontalBarChartView.m; sourceTree = "<group>"; };
-		E873144523BB250600562743 /* GWLCombinedChartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWLCombinedChartView.h; sourceTree = "<group>"; };
-		E873144623BB250600562743 /* GWLCombinedChartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWLCombinedChartView.m; sourceTree = "<group>"; };
-		E873144B23BB2E9C00562743 /* iOS_Charts-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS_Charts-Bridging-Header.h"; sourceTree = "<group>"; };
-		E873144C23BB2E9D00562743 /* GWLSwiftFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GWLSwiftFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				E873144423BB250100562743 /* CombinedChartView */,
-				E873144023BB24F400562743 /* HorizontalBarChartView */,
 				E873143C23BB24E800562743 /* BubbleChartView */,
 				E873143823BB24DC00562743 /* PieChartView */,
 				E873143423BB24CE00562743 /* RadarChartView */,
@@ -174,14 +167,12 @@
 				E87313EC23BB16AE00562743 /* SceneDelegate.m */,
 				E87313EE23BB16AE00562743 /* ViewController.h */,
 				E87313EF23BB16AE00562743 /* ViewController.m */,
-				E873142323BB1EE800562743 /* PrefixHeader.pch */,
-				E873144C23BB2E9D00562743 /* GWLSwiftFile.swift */,
+				E84C905123C6C02400547EE3 /* PrefixHeader.pch */,
 				E87313F123BB16AE00562743 /* Main.storyboard */,
 				E87313F423BB16B000562743 /* Assets.xcassets */,
 				E87313F623BB16B000562743 /* LaunchScreen.storyboard */,
 				E87313F923BB16B000562743 /* Info.plist */,
 				E87313FA23BB16B000562743 /* main.m */,
-				E873144B23BB2E9C00562743 /* iOS_Charts-Bridging-Header.h */,
 			);
 			path = iOS_Charts;
 			sourceTree = "<group>";
@@ -207,8 +198,8 @@
 		E873142423BB246700562743 /* LineChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873142523BB249500562743 /* GWLLineChartView.h */,
-				E873142623BB249500562743 /* GWLLineChartView.m */,
+				E8404E4E23C5D227002A243E /* GWLLineChartViewController.h */,
+				E8404E4F23C5D227002A243E /* GWLLineChartViewController.m */,
 			);
 			path = LineChartView;
 			sourceTree = "<group>";
@@ -216,8 +207,8 @@
 		E873142823BB24A000562743 /* BarChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873142923BB24A900562743 /* GWLBarChartView.h */,
-				E873142A23BB24A900562743 /* GWLBarChartView.m */,
+				E8404E4B23C5D21D002A243E /* GWLBarChartViewController.h */,
+				E8404E4C23C5D21D002A243E /* GWLBarChartViewController.m */,
 			);
 			path = BarChartView;
 			sourceTree = "<group>";
@@ -225,8 +216,8 @@
 		E873142C23BB24B100562743 /* ScatterChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873142D23BB24B800562743 /* GWLScatterChartView.h */,
-				E873142E23BB24B800562743 /* GWLScatterChartView.m */,
+				E8404E4823C5D213002A243E /* GWLScatterChartViewController.h */,
+				E8404E4923C5D213002A243E /* GWLScatterChartViewController.m */,
 			);
 			path = ScatterChartView;
 			sourceTree = "<group>";
@@ -234,8 +225,8 @@
 		E873143023BB24C000562743 /* CandleStickChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873143123BB24C600562743 /* GWLCandleStickChartView.h */,
-				E873143223BB24C600562743 /* GWLCandleStickChartView.m */,
+				E8404E4523C5D20A002A243E /* GWLCandleStickChartViewController.h */,
+				E8404E4623C5D20A002A243E /* GWLCandleStickChartViewController.m */,
 			);
 			path = CandleStickChartView;
 			sourceTree = "<group>";
@@ -243,8 +234,8 @@
 		E873143423BB24CE00562743 /* RadarChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873143523BB24D500562743 /* GWLRadarChartView.h */,
-				E873143623BB24D500562743 /* GWLRadarChartView.m */,
+				E8404E4223C5D200002A243E /* GWLRadarChartViewController.h */,
+				E8404E4323C5D200002A243E /* GWLRadarChartViewController.m */,
 			);
 			path = RadarChartView;
 			sourceTree = "<group>";
@@ -252,8 +243,8 @@
 		E873143823BB24DC00562743 /* PieChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873143923BB24E200562743 /* GWLPieChartView.h */,
-				E873143A23BB24E200562743 /* GWLPieChartView.m */,
+				E8404E3F23C5D1F8002A243E /* GWLPieChartViewController.h */,
+				E8404E4023C5D1F8002A243E /* GWLPieChartViewController.m */,
 			);
 			path = PieChartView;
 			sourceTree = "<group>";
@@ -261,26 +252,17 @@
 		E873143C23BB24E800562743 /* BubbleChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873143D23BB24EE00562743 /* GWLBubbleChartView.h */,
-				E873143E23BB24EE00562743 /* GWLBubbleChartView.m */,
+				E8404E3C23C5D1EF002A243E /* GWLBubbleChartViewController.h */,
+				E8404E3D23C5D1EF002A243E /* GWLBubbleChartViewController.m */,
 			);
 			path = BubbleChartView;
-			sourceTree = "<group>";
-		};
-		E873144023BB24F400562743 /* HorizontalBarChartView */ = {
-			isa = PBXGroup;
-			children = (
-				E873144123BB24F900562743 /* GWLHorizontalBarChartView.h */,
-				E873144223BB24F900562743 /* GWLHorizontalBarChartView.m */,
-			);
-			path = HorizontalBarChartView;
 			sourceTree = "<group>";
 		};
 		E873144423BB250100562743 /* CombinedChartView */ = {
 			isa = PBXGroup;
 			children = (
-				E873144523BB250600562743 /* GWLCombinedChartView.h */,
-				E873144623BB250600562743 /* GWLCombinedChartView.m */,
+				E8404E3923C5D1E2002A243E /* GWLCombinedChartViewController.h */,
+				E8404E3A23C5D1E2002A243E /* GWLCombinedChartViewController.m */,
 			);
 			path = CombinedChartView;
 			sourceTree = "<group>";
@@ -461,20 +443,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E873143323BB24C600562743 /* GWLCandleStickChartView.m in Sources */,
-				E873144723BB250600562743 /* GWLCombinedChartView.m in Sources */,
 				E87313F023BB16AE00562743 /* ViewController.m in Sources */,
 				E87313EA23BB16AE00562743 /* AppDelegate.m in Sources */,
-				E873144D23BB2E9D00562743 /* GWLSwiftFile.swift in Sources */,
-				E873142B23BB24A900562743 /* GWLBarChartView.m in Sources */,
-				E873144323BB24F900562743 /* GWLHorizontalBarChartView.m in Sources */,
+				E8404E4423C5D200002A243E /* GWLRadarChartViewController.m in Sources */,
+				E8404E3B23C5D1E2002A243E /* GWLCombinedChartViewController.m in Sources */,
+				E8404E3E23C5D1EF002A243E /* GWLBubbleChartViewController.m in Sources */,
+				E8404E5023C5D227002A243E /* GWLLineChartViewController.m in Sources */,
 				E87313FB23BB16B000562743 /* main.m in Sources */,
-				E873143B23BB24E200562743 /* GWLPieChartView.m in Sources */,
 				E87313ED23BB16AE00562743 /* SceneDelegate.m in Sources */,
-				E873142F23BB24B800562743 /* GWLScatterChartView.m in Sources */,
-				E873142723BB249500562743 /* GWLLineChartView.m in Sources */,
-				E873143F23BB24EE00562743 /* GWLBubbleChartView.m in Sources */,
-				E873143723BB24D500562743 /* GWLRadarChartView.m in Sources */,
+				E8404E4723C5D20A002A243E /* GWLCandleStickChartViewController.m in Sources */,
+				E8404E4A23C5D213002A243E /* GWLScatterChartViewController.m in Sources */,
+				E8404E4D23C5D21D002A243E /* GWLBarChartViewController.m in Sources */,
+				E8404E4123C5D1F8002A243E /* GWLPieChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,7 +626,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				GCC_PREFIX_HEADER = /Users/gwl/iOS_Charts/iOS_Charts/iOS_Charts/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = iOS_Charts/PrefixHeader.pch;
 				INFOPLIST_FILE = iOS_Charts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -668,7 +648,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				GCC_PREFIX_HEADER = /Users/gwl/iOS_Charts/iOS_Charts/iOS_Charts/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = iOS_Charts/PrefixHeader.pch;
 				INFOPLIST_FILE = iOS_Charts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -685,7 +665,6 @@
 		E873141823BB16B000562743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iOS_ChartsTests/Info.plist;
@@ -705,7 +684,6 @@
 		E873141923BB16B000562743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iOS_ChartsTests/Info.plist;
@@ -725,7 +703,6 @@
 		E873141B23BB16B000562743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iOS_ChartsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -743,7 +720,6 @@
 		E873141C23BB16B000562743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = iOS_ChartsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

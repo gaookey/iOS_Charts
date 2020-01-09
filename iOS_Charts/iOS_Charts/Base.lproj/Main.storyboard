@@ -1,24 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kcb-62-Dxw">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="nVN-FF-PjX">
+            <objects>
+                <navigationController id="kcb-62-Dxw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1UE-ix-1Bo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ycp-xc-wIe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="82O-6m-GrO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-422" y="152"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlC-wl-MSW">
+                                <rect key="frame" x="20" y="108" width="374" height="74.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="CombinedChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushCombinedChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="QWR-od-AYu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfq-xG-gvm">
+                                <rect key="frame" x="20" y="202.5" width="374" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="BubbleChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushBubbleChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="QwX-B9-tk7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-Iu-2Lz">
+                                <rect key="frame" x="20" y="296.5" width="374" height="74.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="PieChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushPieChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="INz-bl-Tap"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA7-2J-gMb">
+                                <rect key="frame" x="20" y="391" width="374" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="RadarChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushRadarChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="naw-1D-vyz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kyk-vV-J9v">
+                                <rect key="frame" x="20" y="485" width="374" height="74.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="CandleStickChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushCandleStickChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hi0-tM-VjT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-Aj-veV">
+                                <rect key="frame" x="20" y="579.5" width="374" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="ScatterChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushScatterChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="PkG-cr-lup"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQ3-M0-O3E">
+                                <rect key="frame" x="20" y="673.5" width="374" height="74.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="BarChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushBarChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="1xp-rv-vgE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXZ-Bo-fRh">
+                                <rect key="frame" x="20" y="768" width="374" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="LineChartView">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushLineChartView" destination="BYZ-38-t0r" eventType="touchUpInside" id="ara-wv-7nC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VA7-2J-gMb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1L1-wi-Tlm"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="1hm-WR-lNq"/>
+                            <constraint firstItem="1gh-Aj-veV" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="6VO-p3-XEE"/>
+                            <constraint firstItem="Tfq-xG-gvm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="78e-2a-VqW"/>
+                            <constraint firstItem="zlC-wl-MSW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7GD-Hn-Cla"/>
+                            <constraint firstItem="iQ3-M0-O3E" firstAttribute="top" secondItem="1gh-Aj-veV" secondAttribute="bottom" constant="20" id="7aH-vh-8wh"/>
+                            <constraint firstItem="iQ3-M0-O3E" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="AGI-dL-lby"/>
+                            <constraint firstItem="aAK-Iu-2Lz" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="ETW-MR-2uQ"/>
+                            <constraint firstItem="1gh-Aj-veV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="F5s-dE-1Rd"/>
+                            <constraint firstItem="aAK-Iu-2Lz" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="Fh3-co-VUJ"/>
+                            <constraint firstItem="1gh-Aj-veV" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="HiS-yl-KgF"/>
+                            <constraint firstItem="Tfq-xG-gvm" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="JLY-q0-Re2"/>
+                            <constraint firstItem="aAK-Iu-2Lz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="K5V-ka-lHt"/>
+                            <constraint firstItem="iQ3-M0-O3E" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="Q4g-MJ-aZu"/>
+                            <constraint firstItem="Tfq-xG-gvm" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="R3s-Tj-Ia7"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="RNU-fM-KhL"/>
+                            <constraint firstItem="Tfq-xG-gvm" firstAttribute="top" secondItem="zlC-wl-MSW" secondAttribute="bottom" constant="20" id="TUh-nI-vbh"/>
+                            <constraint firstItem="VA7-2J-gMb" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="TfA-FP-5es"/>
+                            <constraint firstItem="aAK-Iu-2Lz" firstAttribute="top" secondItem="Tfq-xG-gvm" secondAttribute="bottom" constant="20" id="Vgy-bo-MXH"/>
+                            <constraint firstItem="Kyk-vV-J9v" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="XAx-Vz-tuR"/>
+                            <constraint firstItem="VA7-2J-gMb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="XIH-Rs-lVu"/>
+                            <constraint firstItem="zlC-wl-MSW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="ZuL-zP-v9F"/>
+                            <constraint firstItem="Kyk-vV-J9v" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="aGW-GO-keL"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="cDM-ci-khY"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="gYt-7B-VbO"/>
+                            <constraint firstItem="1gh-Aj-veV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="hvZ-ot-ize"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="top" secondItem="iQ3-M0-O3E" secondAttribute="bottom" constant="20" id="jaT-OZ-2PB"/>
+                            <constraint firstItem="Kyk-vV-J9v" firstAttribute="top" secondItem="VA7-2J-gMb" secondAttribute="bottom" constant="20" id="l77-0b-ZhJ"/>
+                            <constraint firstItem="VA7-2J-gMb" firstAttribute="top" secondItem="aAK-Iu-2Lz" secondAttribute="bottom" constant="20" id="lki-ag-0El"/>
+                            <constraint firstItem="iQ3-M0-O3E" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="mXw-sq-KVQ"/>
+                            <constraint firstItem="zlC-wl-MSW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="rSj-rX-eTv"/>
+                            <constraint firstItem="HXZ-Bo-fRh" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="skN-cV-bt8"/>
+                            <constraint firstItem="1gh-Aj-veV" firstAttribute="top" secondItem="Kyk-vV-J9v" secondAttribute="bottom" constant="20" id="taN-Az-zP6"/>
+                            <constraint firstItem="aAK-Iu-2Lz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="u1D-Rs-Uhd"/>
+                            <constraint firstItem="Kyk-vV-J9v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="uz7-uv-bFA"/>
+                            <constraint firstItem="Tfq-xG-gvm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xXx-xU-fFM"/>
+                            <constraint firstItem="iQ3-M0-O3E" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="y5a-RW-DQB"/>
+                            <constraint firstItem="VA7-2J-gMb" firstAttribute="width" secondItem="zlC-wl-MSW" secondAttribute="width" id="yTf-Du-MmH"/>
+                            <constraint firstItem="Kyk-vV-J9v" firstAttribute="height" secondItem="zlC-wl-MSW" secondAttribute="height" id="zw8-n8-zhb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="3Gv-go-1kb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="283" y="151"/>
         </scene>
     </scenes>
 </document>

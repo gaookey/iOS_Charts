@@ -1,63 +1,80 @@
 //
-//  GWLBarChartView.m
+//  GWLBarChartViewController.m
 //  iOS_Charts
 //
-//  Created by gwl on 2019/12/31.
-//  Copyright © 2019 gwl. All rights reserved.
+//  Created by gwl on 2020/1/8.
+//  Copyright © 2020 gwl. All rights reserved.
 //
 
-#import "GWLBarChartView.h"
+#import "GWLBarChartViewController.h"
 
-@interface GWLBarChartView ()
 
+@interface GWLBarChartViewController () <IChartAxisValueFormatter, ChartViewDelegate>
+
+@property (strong, nonatomic) BarChartView *barChartView;
+
+/// 单层圆柱 x轴标题
 @property (strong, nonatomic) NSArray <NSString *>*titles;
+/// 单层圆柱 数据
 @property (strong, nonatomic) NSArray <NSString *>*datas;
 
 /// 是否是多层
 @property (assign, nonatomic) BOOL isMultiLayer;
+/// 多层圆柱 数据
 @property (strong, nonatomic) NSArray <NSArray <NSString *>*>*multiLayerData;
+/// 多层圆柱 单个圆柱各层颜色数组
 @property (strong, nonatomic) NSArray <UIColor *>*colors;
+/// 多层圆柱 图例文字数组
 @property (strong, nonatomic) NSArray <NSString *>*stackLabels;
 
+/// 页面显示圆柱个数
 @property (assign, nonatomic) NSInteger visibleXRangeMaximum;
 
 @end
 
-@implementation GWLBarChartView
+@implementation GWLBarChartViewController
 
-- (instancetype)initWithFrame:(CGRect)frame datas:(NSArray <NSString *>*)datas titles:(NSArray <NSString *>*)titles {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.titles = [NSArray arrayWithArray:titles];
-        self.datas = [NSArray arrayWithArray:datas];
-        self.isMultiLayer = NO;
-        self.visibleXRangeMaximum = 6;
-        [self setupBarChartView];
-    }
-    return self;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"BarChartView";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.visibleXRangeMaximum = 6;
+    
+    [self loadData];
+    //    [self loadMultiLayerData];
+    [self setupBarChartView];
 }
-- (instancetype)initWithFrame:(CGRect)frame multiLayerData:(NSArray <NSArray <NSString *>*>*)multiLayerData colors:(NSArray <UIColor *>*)colors stackLabels:(NSArray <NSString *>*)stackLabels titles:(NSArray <NSString *>*)titles {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        self.titles = [NSArray arrayWithArray:titles];
-        self.multiLayerData = [NSArray arrayWithArray:multiLayerData];
-        self.stackLabels = [NSArray arrayWithArray:stackLabels];
-        self.colors = [NSArray arrayWithArray:colors];
-        self.isMultiLayer = YES;
-        self.visibleXRangeMaximum = 6;
-        [self setupBarChartView];
-    }
-    return self;
+//单层数据
+- (void)loadData {
+    self.titles = @[@"12",@"2",@"3",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
+    self.datas = @[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"];
+    
+    //    self.titles = @[@"12",@"2"];
+    //    self.datas = @[@"11",@"42"];
 }
-
+//多层数据
+- (void)loadMultiLayerData {
+    self.isMultiLayer = YES;
+    
+    //    self.titles = @[@"4", @"6"];
+    //    self.multiLayerData = @[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"]];
+    //    self.stackLabels = @[@"2", @"5", @"8"];
+    //    self.colors = @[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]];
+    
+    self.titles = @[@"4", @"6", @"7",@"4",@"4", @"6", @"7",@"4",@"4", @"6", @"7",@"4"];
+    self.multiLayerData = @[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"]];
+    self.stackLabels = @[@"2", @"5", @"8"];
+    self.colors = @[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]];
+}
+#pragma mark - BarChartView
 -(void)setupBarChartView {
-    BarChartView *barChartView = [[BarChartView alloc] init];
+    //默认垂直显示，水平柱状图使用 HorizontalBarChartView
+    BarChartView *barChartView = [[BarChartView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT - TABBAR_BOTTOM_HEIGHT)];
     barChartView.delegate = self;
     barChartView.xAxis.valueFormatter = self;
-    barChartView.frame = self.bounds;
-    [self addSubview:barChartView];
+    [self.view addSubview:barChartView];
     self.barChartView = barChartView;
     
 #pragma mark - 配置
@@ -157,8 +174,8 @@
     xAxis.labelTextColor = [UIColor blackColor];
     //x轴标签宽度
     //xAxis.labelWidth = 1;
-    //标签文字倾斜
-    xAxis.labelRotationAngle = -30;
+    //标签文字倾斜，默认0
+    xAxis.labelRotationAngle = 0.0;
     //轴的网格线的宽度
     xAxis.gridLineWidth = 0.5;
     //轴的网格线的颜色
@@ -181,7 +198,7 @@
     leftAxis.axisMinimum = 0;
     //默认OutsideChart
     //leftAxis.labelPosition = YAxisLabelPositionOutsideChart;
-    //最大值到顶部所占整个轴的百分比
+    //最大值到顶部所占整个轴的百分比，默认0.1
     leftAxis.spaceTop = 0.1;
     //y轴网格线个数，默认6
     leftAxis.labelCount = 6;
@@ -227,6 +244,8 @@
     //圆柱阴影色
     //set.barShadowColor = [UIColor orangeColor];
     //set.formLineWidth = 100;
+    //圆柱上是否显示文字
+    set.drawValuesEnabled = YES;
     
     BarChartData *data = [[BarChartData alloc] initWithDataSet:set];
     //显示柱状图顶部文字，默认YES
@@ -271,9 +290,17 @@
     BarChartDataSet *set = [[BarChartDataSet alloc] initWithEntries:yVals];
     set.label = @"图例";
     set.drawIconsEnabled = YES;
+    //圆柱上是否显示文字，默认YES
     set.drawValuesEnabled = YES;
-    set.colors = self.colors;
     set.stackLabels = self.stackLabels;
+    
+    if (set.colors.count > 0) {
+        set.colors = self.colors;
+    } else {
+        NSMutableArray *colors = [[NSMutableArray alloc] init];
+        [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
+        set.colors = colors;
+    }
     
     NSMutableArray *dataSets = [[NSMutableArray alloc] init];
     [dataSets addObject:set];
@@ -294,10 +321,29 @@
     return self.titles[(int)value % self.titles.count];
 }
 #pragma mark ChartViewDelegate
+// 点击
 -(void)chartValueSelected:(ChartViewBase *)chartView entry:(ChartDataEntry *)entry highlight:(ChartHighlight *)highlight {
-    if (self.chartValueSelected) {
-        self.chartValueSelected(entry.x);
-    }
+    NSLog(@"点击了 %f - %f", entry.x, entry.y);
+}
+// 停止在图表上的值之间移动
+- (void)chartViewDidEndPanning:(ChartViewBase *)chartView {
+    
+}
+// 没有选择任何内容或取消选择
+- (void)chartValueNothingSelected:(ChartViewBase *)chartView {
+    
+}
+// 缩放图表
+- (void)chartScaled:(ChartViewBase *)chartView scaleX:(CGFloat)scaleX scaleY:(CGFloat)scaleY {
+    
+}
+// 拖动手势移动/转换图表
+- (void)chartTranslated:(ChartViewBase *)chartView dX:(CGFloat)dX dY:(CGFloat)dY {
+    
+}
+// 停止动画
+- (void)chartView:(ChartViewBase *)chartView animatorDidStop:(ChartAnimator *)animator {
+    
 }
 
 @end

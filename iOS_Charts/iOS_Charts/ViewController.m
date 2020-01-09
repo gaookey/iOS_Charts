@@ -7,7 +7,15 @@
 //
 
 #import "ViewController.h"
-#import "GWLBarChartView.h"
+
+#import "GWLCombinedChartViewController.h"
+#import "GWLBubbleChartViewController.h"
+#import "GWLPieChartViewController.h"
+#import "GWLRadarChartViewController.h"
+#import "GWLCandleStickChartViewController.h"
+#import "GWLScatterChartViewController.h"
+#import "GWLBarChartViewController.h"
+#import "GWLLineChartViewController.h"
 
 @interface ViewController ()
 
@@ -18,20 +26,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupBarChartView];
+    self.title = @"Charts";
 }
-#pragma mark - 圆柱
-- (void)setupBarChartView {
-    GWLBarChartView *barChartView = [[GWLBarChartView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) datas:@[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"] titles:@[@"12",@"2",@"3",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"] ];
-    //      GWLBarChartView *barChartView = [[GWLBarChartView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) datas:@[@"11",@"42"] titles:@[@"12",@"2"] ];
-    
-    //        GWLBarChartView *barChartView = [[GWLBarChartView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) multiLayerData:@[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"]] colors:@[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]] stackLabels:@[@"2", @"5", @"8"] titles:@[@"4", @"6"]];
-    //    GWLBarChartView *barChartView = [[GWLBarChartView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) multiLayerData:@[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"]] colors:@[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]] stackLabels:@[@"2", @"5", @"8"] titles:@[@"4", @"6", @"7",@"4",@"4", @"6", @"7",@"4",@"4", @"6", @"7",@"4"]];
-    
-    [self.view addSubview:barChartView];
-    barChartView.chartValueSelected = ^(NSInteger index) {
-        NSLog(@"%s 第%d行 \n %ld\n\n",__func__,__LINE__, (long)index);
-    };
+
+- (IBAction)pushCombinedChartView {
+    [self.navigationController pushViewController:[[GWLCombinedChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushBubbleChartView {
+    [self.navigationController pushViewController:[[GWLBubbleChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushPieChartView {
+    [self.navigationController pushViewController:[[GWLPieChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushRadarChartView {
+    [self.navigationController pushViewController:[[GWLRadarChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushCandleStickChartView {
+    [self.navigationController pushViewController:[[GWLCandleStickChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushScatterChartView {
+    [self.navigationController pushViewController:[[GWLScatterChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushBarChartView {
+    [self.navigationController pushViewController:[[GWLBarChartViewController alloc] init] animated:YES];
+}
+- (IBAction)pushLineChartView {
+    [self.navigationController pushViewController:[[GWLLineChartViewController alloc] init] animated:YES];
 }
 
 @end
