@@ -40,8 +40,8 @@
     
     self.visibleXRangeMaximum = 6;
     
-//    [self loadData];
-    [self loadStackedData];
+    [self loadData];
+    //    [self loadStackedData];
     [self setupBarChartView];
 }
 // 单层数据
@@ -49,8 +49,8 @@
     self.titles = @[@"12",@"2",@"333333333333333333333333333333333333333333333333333333333333333333333333",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
     self.datas = @[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"];
     
-//    self.titles = @[@"12",@"2"];
-//    self.datas = @[@"11",@"42"];
+    //    self.titles = @[@"12",@"2"];
+    //    self.datas = @[@"11",@"42"];
 }
 // stacked数据
 - (void)loadStackedData {
@@ -69,7 +69,7 @@
 #pragma mark - BarChartView
 -(void)setupBarChartView {
     [self.view addSubview:self.barChartView];
-
+    
 #pragma mark - 配置
     
     //柱状条后面画一个灰色区域，表示最大值。默认NO
@@ -341,7 +341,7 @@
     //隐藏右侧显示，默认YES
     self.barChartView.rightAxis.enabled = YES;
     
-
+    
     [self drawData];
 }
 #pragma mark - data
@@ -396,7 +396,7 @@
     set.highlightEnabled = YES;
     //单个高亮显示颜色
     set.highlightColor = [UIColor purpleColor];
-    //高亮颜色透明度。默认(120.0 / 255.0)
+    //高亮颜色透明度。
     set.highlightAlpha = (120.0 / 255.0);
     //圆柱边宽。默认0.0
     set.barBorderWidth = 0.0;
