@@ -7,12 +7,12 @@ DEPENDENCIES:
   - Charts
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Charts
 
 SPEC CHECKSUMS:
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
 
-PODFILE CHECKSUM: a897c27bef6635b63fa699da284e2a405d231bf0
+PODFILE CHECKSUM: 099bf6614ad966b6ff36d7e72ba2c4b79e86c073
 
 COCOAPODS: 1.8.4

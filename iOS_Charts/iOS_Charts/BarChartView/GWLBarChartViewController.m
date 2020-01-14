@@ -41,7 +41,7 @@
     self.visibleXRangeMaximum = 6;
     
     [self loadData];
-//    [self loadStackedData];
+    //    [self loadStackedData];
     [self setupBarChartView];
 }
 // 单层数据
