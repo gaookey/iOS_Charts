@@ -41,7 +41,7 @@
     self.visibleXRangeMaximum = 6;
     
     [self loadData];
-    //    [self loadStackedData];
+//    [self loadStackedData];
     [self setupBarChartView];
 }
 // 单层数据
@@ -303,6 +303,10 @@
     leftAxis.yOffset = 0.0;
     
     // !!!: AxisBase (参见 XAxis -> AxisBase)
+    //y轴最大值
+    //leftAxis.axisMaximum = 100;
+    //y值最小值，不设置此值在stacked时，圆柱悬空(不从x轴线开始)
+    leftAxis.axisMinimum = 0;
     
     // !!!: YAxis 属性
     
