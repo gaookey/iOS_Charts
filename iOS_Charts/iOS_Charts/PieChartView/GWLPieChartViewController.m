@@ -88,7 +88,6 @@
     //是否双指拖拽旋转，值为YES时则单指无法拖拽旋转。默认NO
     self.pieChartView.rotationWithTwoFingers = NO;
     
-    
     //空表时显示的文本
     self.pieChartView.noDataText = @"暂无数据";
     self.pieChartView.noDataFont = [UIFont systemFontOfSize:13];
@@ -152,7 +151,7 @@
         [values addObject:[[PieChartDataEntry alloc] initWithValue:bb label:aaa]];
     }
     
-    PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithEntries:values label:@"sadad"];
+    PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithEntries:values label:@"图例"];
     dataSet.drawValuesEnabled = YES;
     //文字显示位置，默认insideSlice
     // dataSet.xValuePosition = PieChartValuePositionOutsideSlice;
@@ -177,7 +176,7 @@
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，指示线后半部分长度占饼图百分比。默认0.4
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，旋转饼图时，是否动态改变指示线的长度。默认YES
     dataSet.valueLineVariableLength = YES;
-    dataSet.entryLabelFont = [UIFont systemFontOfSize:60];
+    dataSet.entryLabelFont = [UIFont systemFontOfSize:12];
     dataSet.entryLabelColor = [UIColor blueColor];
     //饼图选中后的颜色
     dataSet.highlightColor = [UIColor grayColor];
