@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) PieChartView *pieChartView;
 
+@property (strong, nonatomic) NSArray *datas;
+@property (strong, nonatomic) NSArray <UIColor *>*colors;
+
 @end
 
 @implementation GWLPieChartViewController
@@ -22,11 +25,13 @@
     self.title = @"PieChartView";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self setupView:@[@"32", @"12", @"45", @"24", @"50"] colorsArr:@[]];
+    self.datas = @[@"32", @"12", @"45", @"24", @"50"];
+    self.colors = @[];
+    
+    [self setupPieChartView];
 }
 
-- (void)setupView:(NSArray *)arr colorsArr:(NSArray *)colorsArr {
-    self.pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT - TABBAR_BOTTOM_HEIGHT)];
+- (void)setupPieChartView {
     [self.view addSubview:self.pieChartView];
     
     //饼状图距离边缘的间隙
@@ -50,7 +55,6 @@
     
     self.pieChartView.highlightPerTapEnabled = YES;
     
-
     //标记，指示是否应该绘制入口标签。默认 YES
     self.pieChartView.drawEntryLabelsEnabled = YES;
     //条目标签的颜色。
@@ -137,15 +141,15 @@
     //图示大小
     self.pieChartView.legend.formSize = 30;
     
-    [self setData:arr colorsArr:colorsArr];
+    [self drawData];
 }
 
-- (PieChartData *)setData:(NSArray *)arr colorsArr:(NSArray *)colorsArr {
+- (void)drawData {
     NSMutableArray *values = [[NSMutableArray alloc] init];
-    for (int i = 0; i < arr.count; i++) {
-        NSString * aaa = arr[i];
+    for (int i = 0; i < self.datas.count; i++) {
+        NSString * aaa = self.datas[i];
         double bb = aaa.doubleValue;
-        [values addObject:[[PieChartDataEntry alloc] initWithValue: bb label:@""]];
+        [values addObject:[[PieChartDataEntry alloc] initWithValue:bb label:aaa]];
     }
     
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithEntries:values label:@"sadad"];
@@ -182,8 +186,8 @@
     
     NSMutableArray *colors = [[NSMutableArray alloc] init];
     
-    if (colorsArr.count > 0) {
-        dataSet.colors = [NSMutableArray arrayWithArray:colorsArr];
+    if (self.colors.count > 0) {
+        dataSet.colors = [NSMutableArray arrayWithArray:self.colors];
     } else {
         [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
         dataSet.colors = colors;
@@ -196,12 +200,16 @@
     data.highlightEnabled = YES;
     
     self.pieChartView.data = data;
-    [self.pieChartView setNeedsDisplay];
-    
-    return data;
 }
 
 #pragma mark ChartViewDelegate 参见 GWLBarChartView
 
+#pragma mark - lazy
+- (PieChartView *)pieChartView {
+    if (!_pieChartView) {
+        _pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT - TABBAR_BOTTOM_HEIGHT)];
+    }
+    return _pieChartView;
+}
 
 @end
