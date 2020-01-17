@@ -34,55 +34,52 @@
 - (void)setupPieChartView {
     [self.view addSubview:self.pieChartView];
     
-    //饼状图距离边缘的间隙
-    [self.pieChartView setExtraOffsetsWithLeft:30 top:30 right:30 bottom:30];
-    //是否根据所提供的数据, 将显示数据转换为百分比格式，默认YES
-    self.pieChartView.usePercentValuesEnabled = YES;
+    //是否根据所提供的数据, 将显示数据转换为百分比格式。默认NO
+    self.pieChartView.usePercentValuesEnabled = NO;
     //图形是否延伸到中心，即无空心。默认NO
     self.pieChartView.drawSlicesUnderHoleEnabled= NO;
     //空心半径占比。默认0.5
     self.pieChartView.holeRadiusPercent = 0.5;
-    //半透明空心半径占比
+    //半透明空心半径占比。默认0.55
     self.pieChartView.transparentCircleRadiusPercent = 0.55;
-    //半透明空心的颜色
-    self.pieChartView.transparentCircleColor = [UIColor redColor];
+    //半透明空心的颜色。默认(white: 1.0, alpha: 105.0/255.0)
+    self.pieChartView.transparentCircleColor = [UIColor colorWithWhite:1 alpha:(105.0/255.0)];
     //是否允许拖拽旋转。默认YES
     self.pieChartView.rotationEnabled = YES;
     //拖拽饼状图后是否有惯性效果。默认YES
     self.pieChartView.dragDecelerationEnabled = YES;
     //拖拽旋转后惯性系数0-1。默认0.9
     self.pieChartView.dragDecelerationFrictionCoef = 0.9;
-    
+    //设置为NO，禁止点击手势高亮显示值，值仍然可以通过拖动或编程方式突出显示。默认YES
     self.pieChartView.highlightPerTapEnabled = YES;
     
     //标记，指示是否应该绘制入口标签。默认 YES
     self.pieChartView.drawEntryLabelsEnabled = YES;
     //条目标签的颜色。
-    self.pieChartView.entryLabelColor = [UIColor redColor];
-    //条目标签字体大小。name: "", size: 13.0
-    self.pieChartView.entryLabelFont = [UIFont systemFontOfSize:13];
+    self.pieChartView.entryLabelColor = [UIColor whiteColor];
+    //条目标签字体大小。默认(name: "HelveticaNeue", size: 13.0)
+    self.pieChartView.entryLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
     
-    //默认NO
-    self.pieChartView.drawSlicesUnderHoleEnabled = YES;
-    
-    //饼状图是否是空心，默认YES
+    //饼状图是否是空心.默认YES
     self.pieChartView.drawHoleEnabled = YES;
     //空心颜色。默认white
     self.pieChartView.holeColor = [UIColor whiteColor];
-    //是否显示中心文字
+    //是否显示中心文字。默认YES
     self.pieChartView.drawCenterTextEnabled = YES;
     //中心文字
-    self.pieChartView.centerText = @"中间文字";
+    self.pieChartView.centerText = @"中心文字";
+    NSMutableAttributedString *centerAttributedText = [[NSMutableAttributedString alloc] initWithString:self.pieChartView.centerText];
+    [centerAttributedText setAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]} range:NSMakeRange(0, @"中心".length)];
     //中心文字 富文本
-    //self.pieChartView.centerAttributedText = ;
+    self.pieChartView.centerAttributedText = centerAttributedText;
     //中心文字的偏移量
     self.pieChartView.centerTextOffset = CGPointMake(0, 0);
-    //默认1.0
+    //中心文字显示的半径百分比。默认1.0
     self.pieChartView.centerTextRadiusPercent = 1.0;
     //饼图显示的最大角度。默认360.0
-    self.pieChartView.maxAngle = 360;
+    self.pieChartView.maxAngle = 360.0;
     //饼图显示时旋转的角度。默认270.0
-    self.pieChartView.rotationAngle = 270;
+    self.pieChartView.rotationAngle = 270.0;
     //饼图周围的最小偏移量，影响饼图大小。默认0
     self.pieChartView.minOffset = 0;
     //是否双指拖拽旋转，值为YES时则单指无法拖拽旋转。默认NO
@@ -90,9 +87,11 @@
     
     //空表时显示的文本
     self.pieChartView.noDataText = @"暂无数据";
-    self.pieChartView.noDataFont = [UIFont systemFontOfSize:13];
+    //空表时显示文本的大小。默认12
+    self.pieChartView.noDataFont = [UIFont systemFontOfSize:12];
+    //空表时显示文本的颜色。默认black
     self.pieChartView.noDataTextColor = [UIColor blackColor];
-    //默认left
+    //空表时显示文本的位置。默认left
     self.pieChartView.noDataTextAlignment = NSTextAlignmentLeft;
     
     //默认YES
@@ -106,39 +105,40 @@
     self.pieChartView.extraBottomOffset = 0;
     //左侧偏移量，影响饼图大小。默认0
     self.pieChartView.extraLeftOffset = 0;
+    //饼状图距离边缘的间隙
+    [self.pieChartView setExtraOffsetsWithLeft:0 top:0 right:0 bottom:0];
     
-    //饼状图描述
-    self.pieChartView.chartDescription.enabled = YES;
-    if (self.pieChartView.chartDescription.isEnabled) {
-        //饼状图描述文字
-        self.pieChartView.chartDescription.text = @"饼状图描述文字";
-        //饼状图描述文字颜色
-        self.pieChartView.chartDescription.textColor = [UIColor redColor];
-        //饼状图描述文字位置。默认right
-        self.pieChartView.chartDescription.textAlign = NSTextAlignmentRight;
-        //饼状图描述文字大小
-        self.pieChartView.chartDescription.font = [UIFont systemFontOfSize:15];
-    }
+    //是否显示饼状图描述。默认NO
+    self.pieChartView.chartDescription.enabled = NO;
+    //饼状图描述文字。
+    self.pieChartView.chartDescription.text = @"饼状图描述文字";
+    //饼状图描述文字颜色。默认black
+    self.pieChartView.chartDescription.textColor = [UIColor blackColor];
+    //饼状图描述文字位置。默认right
+    self.pieChartView.chartDescription.textAlign = NSTextAlignmentRight;
+    //饼状图描述文字大小。
+    self.pieChartView.chartDescription.font = [UIFont systemFontOfSize:12];
     
+    //是否显示图例
     self.pieChartView.legend.enabled = YES;
     //图例在饼状图中的大小占比。默认0.95
     self.pieChartView.legend.maxSizePercent = 0.95;
-    ////图例文本间隔
-    self.pieChartView.legend.formToTextSpace = 50;
-    ////图例字体大小间隔
-    self.pieChartView.legend.font = [UIFont systemFontOfSize:20];
-    ////图例字体颜色间隔
-    self.pieChartView.legend.textColor = [UIColor blueColor];
-    //图例在饼状图中水平方向的位置，默认left
+    ////图例文本间隔。默认5.0
+    self.pieChartView.legend.formToTextSpace = 5.0;
+    ////图例字体大小。默认10.0
+    self.pieChartView.legend.font = [UIFont systemFontOfSize:10.0];
+    ////图例字体颜色间隔。默认black
+    self.pieChartView.legend.textColor = [UIColor blackColor];
+    //图例在饼状图中水平方向的位置。默认left
     self.pieChartView.legend.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
-    //图例在饼状图中垂直方向的位置，默认bottom
+    //图例在饼状图中垂直方向的位置。默认bottom
     self.pieChartView.legend.verticalAlignment = ChartLegendVerticalAlignmentBottom;
-    //图例排列方向，默认horizontal
+    //图例排列方向。默认horizontal
     self.pieChartView.legend.orientation = ChartLegendOrientationHorizontal;
     //图示样式。默认square
     self.pieChartView.legend.form = ChartLegendFormSquare;
-    //图示大小
-    self.pieChartView.legend.formSize = 30;
+    //图示大小。默认8.0
+    self.pieChartView.legend.formSize = 8.0;
     
     [self drawData];
 }
@@ -152,12 +152,14 @@
     }
     
     PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithEntries:values label:@"图例"];
+    //是否显示数值。默认YES
     dataSet.drawValuesEnabled = YES;
-    //文字显示位置，默认insideSlice
-    // dataSet.xValuePosition = PieChartValuePositionOutsideSlice;
-    //文字显示位置，默认insideSlice
-    dataSet.yValuePosition = PieChartValuePositionOutsideSlice;
-    dataSet.valueFont = [UIFont systemFontOfSize:20];
+    //文字显示位置。默认insideSlice
+    dataSet.xValuePosition = PieChartValuePositionInsideSlice;
+    //文字显示位置。默认insideSlice
+    dataSet.yValuePosition = PieChartValuePositionInsideSlice;
+    //数值文字大小
+    dataSet.valueFont = [UIFont systemFontOfSize:12];
     dataSet.valueTextColor = [UIColor blackColor];
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，指示线颜色和饼图切片颜色相同。默认NO
     dataSet.useValueColorForLine = NO;
@@ -176,23 +178,25 @@
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，指示线后半部分长度占饼图百分比。默认0.4
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，旋转饼图时，是否动态改变指示线的长度。默认YES
     dataSet.valueLineVariableLength = YES;
-    dataSet.entryLabelFont = [UIFont systemFontOfSize:12];
-    dataSet.entryLabelColor = [UIColor blueColor];
+    //文字大小
+    dataSet.entryLabelFont = [UIFont systemFontOfSize:50];
+    //文字颜色
+    dataSet.entryLabelColor = [UIColor blackColor];
     //饼图选中后的颜色
     dataSet.highlightColor = [UIColor grayColor];
     //饼图距离边距距离。默认18.0
-    dataSet.selectionShift = 18;
+    dataSet.selectionShift = 18.0;
+    //饼片之间的距离。默认0.0
+    dataSet.sliceSpace = 0.0;
     
+    //每个饼片的颜色
     NSMutableArray *colors = [[NSMutableArray alloc] init];
-    
     if (self.colors.count > 0) {
         dataSet.colors = [NSMutableArray arrayWithArray:self.colors];
     } else {
         [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
         dataSet.colors = colors;
     }
-    
-    dataSet.sliceSpace = 0;
     
     PieChartData *data = [[PieChartData alloc] initWithDataSet:dataSet];
     //饼图选中后时候放大显示。默认YES
