@@ -179,7 +179,7 @@
     //yValuePosition == PieChartValuePositionOutsideSlice 时生效，旋转饼图时，是否动态改变指示线的长度。默认YES
     dataSet.valueLineVariableLength = YES;
     //文字大小
-    dataSet.entryLabelFont = [UIFont systemFontOfSize:50];
+    dataSet.entryLabelFont = [UIFont systemFontOfSize:13];
     //文字颜色
     dataSet.entryLabelColor = [UIColor blackColor];
     //饼图选中后的颜色
