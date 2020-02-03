@@ -11,7 +11,10 @@
 @interface GWLLineChartViewController () <IChartAxisValueFormatter, ChartViewDelegate>
 
 @property (strong, nonatomic) LineChartView *lineChartView;
+///数据
 @property (strong, nonatomic) NSArray *datas;
+///x轴标签
+@property (strong, nonatomic) NSArray *titles;
 
 @end
 
@@ -23,7 +26,8 @@
     self.title = @"LineChartView";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.datas = @[@"23", @"13", @"53", @"63", @"35", @"39", @"70", @"23", @"13", @"53", @"63", @"35", @"39", @"70", @"23", @"13", @"53", @"63", @"35", @"39", @"120", @"23", @"13", @"53", @"63", @"35", @"39", @"70"];
+    self.titles = @[@"1标签", @"1标签3", @"5标签3", @"标签63", @"35标签", @"39标签", @"7标签0", @"2标签3",@"2标签3", @"标签13", @"标签53", @"6标签3", @"35标签", @"39标签", @"70标签", @"2标签3"];
+    self.datas = @[@"23", @"13", @"53", @"63", @"35", @"39", @"70", @"23",@"23", @"13", @"53", @"63", @"35", @"39", @"70", @"23"];
     
     [self setupLineChartView];
 }
@@ -210,7 +214,7 @@
     //x轴第一个和最后一个标签条目超过图表边缘时剪切。默认NO
     xAxis.avoidFirstLastClippingEnabled = NO;
     //x轴文字位置。默认top
-    xAxis.labelPosition = XAxisLabelPositionTop;
+    xAxis.labelPosition = XAxisLabelPositionBottom;
     //x轴标签文字换行。默认NO
     xAxis.wordWrapEnabled = NO;
     //wordWrapEnabled == YES时，x轴标签显示宽度的百分比。默认1.0
@@ -269,7 +273,7 @@
     
 #pragma mark - rightAxis y轴(参考leftAxis)
     //隐藏右侧显示，默认YES
-    self.lineChartView.rightAxis.enabled = YES;
+    self.lineChartView.rightAxis.enabled = NO;
     
     
     [self drawData];
@@ -284,21 +288,87 @@
     }
     
     LineChartDataSet *dataSet = [[LineChartDataSet alloc] initWithEntries:values label:@"图例"];
+    //(0.05-1.0)。默认0.2
+    dataSet.cubicIntensity = 0.2;
+    //显示每个点。默认YES
+    dataSet.drawCirclesEnabled = YES;
+    //是否圆心。默认YES
+    dataSet.drawCircleHoleEnabled = YES;
+    //每个点的大小。默认8.0
+    dataSet.circleRadius = 8.0;
+    //每个点的空心半径。默认4.0
+    dataSet.circleHoleRadius = 4.0;
+    //每个点的颜色。默认
+    //dataSet.circleColors = @[UIColor.redColor, UIColor.orangeColor, UIColor.purpleColor];
+    //每个点的空心颜色。默认white
+    dataSet.circleHoleColor = UIColor.whiteColor;
+    //默认0.0
+    dataSet.lineDashPhase = 0.0;
+    //折线虚线效果
+    dataSet.lineDashLengths = @[];
+//    dataSet.valueColors
+//    dataSet.valueTextColor
+    //折线颜色
+    //dataSet.colors = @[UIColor.redColor, UIColor.purpleColor, UIColor.orangeColor, UIColor.blueColor];
+    //折线颜色
+    dataSet.color = UIColor.cyanColor;
+    //单个高亮显示
+    dataSet.highlightEnabled = YES;
+    //单个高亮显示颜色
+    dataSet.highlightColor = [UIColor purpleColor];
+    //圆柱上是否显示文字
+    dataSet.drawValuesEnabled = YES;
+    dataSet.lineCapType = kCGLineCapButt;
+    
+    //显示折线下填充颜色。默认NO
+    dataSet.drawFilledEnabled = NO;
+    dataSet.fillColor = UIColor.orangeColor;
+    //默认0.33
+    dataSet.fillAlpha = 0.33;
+    //折线的宽度(0.0-10.0)。默认1.0
+    dataSet.lineWidth = 1.0;
+    dataSet.formLineWidth = 50.0;
+    
+    NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
+       setFormatter.positiveSuffix = @"%";
+//       [dataSet setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:setFormatter]];
+    
     
     LineChartData *data = [[LineChartData alloc] initWithDataSet:dataSet];
+    //显示每个顶点上的文字。默认YES
+    [data setDrawValues:YES];
+//    [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:[[NSNumberFormatter alloc] init]]];
+    //文字颜色
+    [data setValueTextColor:UIColor.blackColor];
+    //文字大小
+    [data setValueFont:[UIFont systemFontOfSize:10]];
+    
+    
+//    NSArray *arr = @[@"13", @"33", @"63", @"63", @"75", @"19", @"30"];
+//    NSMutableArray *values2 = [[NSMutableArray alloc] init];
+//       for (int i = 0; i < arr.count; i++) {
+//           NSString * aaa = arr[i];
+//           double bb = aaa.doubleValue;
+//           ChartDataEntry *entry = [[ChartDataEntry alloc] initWithX:i y:bb];
+//           [values2 addObject:entry];
+//       }
+//       LineChartDataSet *dataSet2 = [[LineChartDataSet alloc] initWithEntries:values2 label:@"图例2"];
+//
+//    dataSet2.color = UIColor.redColor;
+//    [data addDataSet:dataSet2];
     
     self.lineChartView.data = data;
 }
 #pragma mark - IChartAxisValueFormatter
-- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
-    return self.datas[(int)value % self.datas.count];
-}
+//- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
+//    return self.datas[(int)value % self.datas.count];
+//}
 #pragma mark - lazy
 - (LineChartView *)lineChartView {
     if (!_lineChartView) {
         _lineChartView = [[LineChartView alloc] initWithFrame:CGRectMake(0, NAV_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAV_HEIGHT - TABBAR_BOTTOM_HEIGHT)];
         _lineChartView.delegate = self;
-        _lineChartView.xAxis.valueFormatter = self;
+//        _lineChartView.xAxis.valueFormatter = self;
     }
     return _lineChartView;
 }
