@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSArray *datas;
 @property (strong, nonatomic) NSArray <UIColor *>*colors;
+@property (strong, nonatomic) UIView *maskView;
 
 @end
 
@@ -96,6 +97,13 @@
     
     //默认YES
     self.pieChartView.drawMarkers = YES;
+    ChartMarkerView *makerView = [[ChartMarkerView alloc] init];
+    makerView.chartView = self.pieChartView;
+    self.pieChartView.marker = makerView;
+    //自定义的maskView
+    self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 33, 33)];
+    self.maskView.backgroundColor = UIColor.redColor;
+    [makerView addSubview:self.maskView];
     
     //顶部偏移量，影响饼图大小。默认0
     self.pieChartView.extraTopOffset = 0;

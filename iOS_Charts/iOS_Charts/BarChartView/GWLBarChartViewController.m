@@ -28,6 +28,9 @@
 /// 页面显示圆柱个数
 @property (assign, nonatomic) NSInteger visibleXRangeMaximum;
 
+///maskView
+@property (strong, nonatomic) UIView *maskView;
+
 @end
 
 @implementation GWLBarChartViewController
@@ -46,11 +49,11 @@
 }
 // 单层数据
 - (void)loadData {
-    self.titles = @[@"12",@"2",@"333333333333333333333333333333333333333333333333333333333333333333333333",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
+    self.titles = @[@"12",@"2",@"3",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
     self.datas = @[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"];
     
-    //    self.titles = @[@"12",@"2"];
-    //    self.datas = @[@"11",@"42"];
+    //self.titles = @[@"12",@"2"];
+    //self.datas = @[@"11",@"42"];
 }
 // stacked数据
 - (void)loadStackedData {
@@ -133,6 +136,14 @@
     self.barChartView.keepPositionOnRotation = YES;
     //默认YES
     self.barChartView.drawMarkers = YES;
+    ChartMarkerView *makerView = [[ChartMarkerView alloc] init];
+    makerView.chartView = self.barChartView;
+    self.barChartView.marker = makerView;
+    //自定义的maskView
+    self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 33, 33)];
+    self.maskView.backgroundColor = UIColor.redColor;
+    [makerView addSubview:self.maskView];
+    
     
     ChartDescription *chartDescription = [[ChartDescription alloc] init];
     chartDescription.text = @"图表描述文字";
@@ -243,7 +254,8 @@
     setFormatter.positivePrefix = @"第";
     setFormatter.positiveSuffix = @"个";
     //xAxis.valueFormatter = [[ChartDefaultAxisValueFormatter alloc] initWithFormatter:setFormatter];
-    //xAxis.decimals = 0;
+    //小数位
+    xAxis.decimals = 0;
     
     //默认NO
     xAxis.forceLabelsEnabled = NO;
@@ -284,7 +296,7 @@
     //x轴第一个和最后一个标签条目超过图表边缘时剪切。默认NO
     xAxis.avoidFirstLastClippingEnabled = NO;
     //x轴文字位置。默认top
-    xAxis.labelPosition = XAxisLabelPositionTop;
+    xAxis.labelPosition = XAxisLabelPositionBottom;
     //x轴标签文字换行。默认NO
     xAxis.wordWrapEnabled = NO;
     //wordWrapEnabled == YES时，x轴标签显示宽度的百分比。默认1.0
@@ -421,6 +433,16 @@
     //圆柱和间距的比例，默认0.85
     [data setBarWidth:0.85];
     
+    
+NSMutableArray *entries2 = [NSMutableArray array];
+    NSArray *datas = @[@"21",@"22",@"13",@"62",@"25",@"36.000",@"38",@"19",@"32",@"29",@"38",@"52"];
+    for (int i = 0; i < datas.count; i++) {
+        BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i y:[datas[i] integerValue]];
+        [entries2 addObject:entry];
+    }
+    BarChartDataSet *set2 = [[BarChartDataSet alloc] initWithEntries:entries2 label:@"图例2"];
+    [data addDataSet:set2];
+
     self.barChartView.data = data;
     
     if (self.titles.count > self.visibleXRangeMaximum) {
