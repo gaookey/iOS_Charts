@@ -44,7 +44,7 @@
     self.visibleXRangeMaximum = 6;
     
     [self loadData];
-    //    [self loadStackedData];
+    //[self loadStackedData];
     [self setupBarChartView];
 }
 // 单层数据
@@ -434,15 +434,6 @@
     [data setBarWidth:0.85];
     
     
-NSMutableArray *entries2 = [NSMutableArray array];
-    NSArray *datas = @[@"21",@"22",@"13",@"62",@"25",@"36.000",@"38",@"19",@"32",@"29",@"38",@"52"];
-    for (int i = 0; i < datas.count; i++) {
-        BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i y:[datas[i] integerValue]];
-        [entries2 addObject:entry];
-    }
-    BarChartDataSet *set2 = [[BarChartDataSet alloc] initWithEntries:entries2 label:@"图例2"];
-    [data addDataSet:set2];
-
     self.barChartView.data = data;
     
     if (self.titles.count > self.visibleXRangeMaximum) {
