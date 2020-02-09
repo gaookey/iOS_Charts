@@ -506,7 +506,7 @@ typedef NS_ENUM(NSInteger, BarChartViewType) {
     
     self.barChartView.data = data;
     
-    //设置左右滑动，和xAxis.labelCount配合使用。
+    //设置左右滑动。
     [self.barChartView setVisibleXRangeMaximum:8];
 }
 #pragma mark - IChartAxisValueFormatter
