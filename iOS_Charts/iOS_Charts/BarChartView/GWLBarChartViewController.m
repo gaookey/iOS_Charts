@@ -8,25 +8,28 @@
 
 #import "GWLBarChartViewController.h"
 
+typedef NS_ENUM(NSInteger, BarChartViewType) {
+    BarChartViewTypeSingle = 1 << 0,//单柱
+    BarChartViewTypeGroup = 1 << 1,//分组
+    BarChartViewTypeStacked = 1 << 2,//堆叠式
+};
+
 @interface GWLBarChartViewController () <IChartAxisValueFormatter, ChartViewDelegate>
 
 /// 默认垂直显示，水平柱状图使用 HorizontalBarChartView
 @property (strong, nonatomic) BarChartView *barChartView;
+
+@property (assign, nonatomic) BarChartViewType barChartViewType;
 
 /// 圆柱 数据
 @property (strong, nonatomic) NSArray *datas;
 /// 圆柱 x轴标题
 @property (strong, nonatomic) NSArray *titles;
 
-/// 是否是堆叠式
-@property (assign, nonatomic) BOOL isStacked;
 /// 堆叠式圆柱 单个圆柱各层颜色数组
 @property (strong, nonatomic) NSArray <UIColor *>*stackColors;
 /// 堆叠式圆柱 图例文字数组
 @property (strong, nonatomic) NSArray *stackLabels;
-
-/// 页面显示圆柱个数
-@property (assign, nonatomic) NSInteger visibleXRangeMaximum;
 
 ///maskView
 @property (strong, nonatomic) UIView *maskView;
@@ -41,33 +44,33 @@
     self.title = @"BarChartView";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.visibleXRangeMaximum = 6;
-    
     [self loadData];
-    //[self loadStackedData];
+//    [self loadStackedData];
+//    [self loadGroupData];
     [self setupBarChartView];
 }
 // 单层数据
 - (void)loadData {
+    self.barChartViewType = BarChartViewTypeSingle;
+    
     self.titles = @[@"12",@"2",@"3",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
     self.datas = @[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"];
-    
-    //self.titles = @[@"12",@"2"];
-    //self.datas = @[@"11",@"42"];
 }
 // stacked数据
 - (void)loadStackedData {
-    self.isStacked = YES;
-    
-    //self.titles = @[@"4", @"6"];
-    //self.datas = @[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"]];
-    //self.stackLabels = @[@"2", @"5", @"8"];
-    //self.colors = @[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]];
+    self.barChartViewType = BarChartViewTypeStacked;
     
     self.titles = @[@"4", @"6", @"7",@"433333333333333333333",@"4", @"6", @"7",@"4",@"4", @"6", @"7",@"4"];
-    self.datas = @[@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"]];
+    self.datas = @[@[@"12", @"32", @"23"], @[@"32",@"12",@"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",@"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"],@[@"12", @"32", @"23"], @[@"32",@"12",  @"23"], @[@"12", @"23",@"32"],@[@"12", @"32", @"23"]];
     self.stackLabels = @[@"2", @"5", @"8"];
     self.stackColors = @[[UIColor orangeColor], [UIColor grayColor], [UIColor cyanColor]];
+}
+//分组数据
+- (void)loadGroupData {
+    self.barChartViewType = BarChartViewTypeGroup;
+    
+    self.datas = @[@[@"99", @"32", @"23", @"35", @"78", @"13"], @[@"12", @"33", @"58", @"03", @"48", @"29"], @[@"08", @"59", @"12", @"32", @"59", @"20"]];
+    self.titles = @[@"4",@"6", @"7",@"4",@"4", @"5"];
 }
 #pragma mark - BarChartView
 -(void)setupBarChartView {
@@ -240,14 +243,12 @@
     //网格线的虚线效果，间距值
     xAxis.gridLineDashLengths = @[];
     
-    //设置x轴标签显示，例如：设置3则每隔两个柱子显示一个标签。默认1
+    //默认NO
+    xAxis.granularityEnabled = NO;
+    //granularityEnabled = YES时，设置x轴标签显示，例如：设置3则每隔两个柱子显示一个标签。默认1
     xAxis.granularity = 1;
-    //x轴显示数量，默认6
-    if (self.titles.count > self.visibleXRangeMaximum) {
-        xAxis.labelCount = self.visibleXRangeMaximum;
-    } else {
-        xAxis.labelCount = self.titles.count;
-    }
+    //x轴显示数量，全部显示，不滑动。若设置setVisibleXRangeMaximum则labelCount设置无效
+    xAxis.labelCount = self.titles.count;
     
     //标签格式化，设置后则titles显示换成0开始的序列号
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
@@ -257,16 +258,12 @@
     //小数位
     xAxis.decimals = 0;
     
-    //默认NO
+    //不强制绘制指定数量的label。默认NO
     xAxis.forceLabelsEnabled = NO;
     //默认0.0
     xAxis.axisRange = 0;
-    //默认NO
-    xAxis.drawLimitLinesBehindDataEnabled = NO;
-    //默认YES
+    //开启抗锯齿。默认YES
     xAxis.gridAntialiasEnabled = YES;
-    //默认NO
-    xAxis.granularityEnabled = NO;
     //默认butt
     xAxis.gridLineCap = kCGLineCapButt;
     
@@ -298,9 +295,16 @@
     //x轴文字位置。默认top
     xAxis.labelPosition = XAxisLabelPositionBottom;
     //x轴标签文字换行。默认NO
-    xAxis.wordWrapEnabled = NO;
+    xAxis.wordWrapEnabled = YES;
     //wordWrapEnabled == YES时，x轴标签显示宽度的百分比。默认1.0
     xAxis.wordWrapWidthPercent = 1.0;
+    
+    //添加限制线
+    ChartLimitLine *xLimitLine = [[ChartLimitLine alloc] initWithLimit:2 label:@"x轴限制线"];
+    //添加到Y轴上
+    [xAxis addLimitLine:xLimitLine];
+    //限制线。默认NO
+    xAxis.drawLimitLinesBehindDataEnabled = YES;
     
 #pragma mark - leftAxis y轴
     ChartYAxis *leftAxis = self.barChartView.leftAxis;
@@ -353,57 +357,124 @@
     //y轴最大宽度
     leftAxis.maxWidth = 50.0;
     
+    //添加限制线
+    ChartLimitLine *yLimitLine = [[ChartLimitLine alloc] initWithLimit:35 label:@"y轴限制线"];
+    yLimitLine.lineWidth = 2;
+    yLimitLine.lineColor = [UIColor greenColor];
+    //虚线样式
+    yLimitLine.lineDashLengths = @[@5.0f, @5.0f];
+    //位置
+    yLimitLine.labelPosition = ChartLimitLabelPositionTopRight;
+    //添加到Y轴上
+    [leftAxis addLimitLine:yLimitLine];
+    //限制线。默认NO
+    leftAxis.drawLimitLinesBehindDataEnabled = YES;
+    
 #pragma mark - rightAxis y轴(参考leftAxis)
     //隐藏右侧显示，默认YES
-    self.barChartView.rightAxis.enabled = YES;
+    self.barChartView.rightAxis.enabled = NO;
     
     
-    [self drawData];
+    switch (self.barChartViewType) {
+        case BarChartViewTypeSingle:
+            [self drawData];
+            break;
+        case BarChartViewTypeGroup:
+            [self drawGroupData];
+            break;
+        case BarChartViewTypeStacked:
+            [self drawStackedData];
+            break;
+            
+        default:
+            break;
+    }
+}
+#pragma mark - GroupData
+- (void)drawGroupData {
+    double dataSetMax = 0;
+    float groupSpace = 0.4;
+    float barSpace = 0.03;
+    //柱子宽度（(barSpace + barWidth) * 系列数 + groupSpace = 1.00 -> interval per "group"）
+    float barWidth = 0.17;
+    
+    NSMutableArray *dataSets = [NSMutableArray array];
+    for (int i = 0; i < self.datas.count; i++) {
+        NSMutableArray *yVals = [NSMutableArray array];
+        BarChartDataSet *set = nil;
+        NSArray *array = self.datas[i];
+        for (int j = 0; j < array.count; j++) {
+            double val = [array[j] doubleValue];
+            dataSetMax = MAX(val, dataSetMax);
+            [yVals addObject:[[BarChartDataEntry alloc] initWithX:j y:val]];
+            set = [[BarChartDataSet alloc] initWithEntries:yVals label:[NSString stringWithFormat:@"第%d个图例",i]];
+            [set setColor:[UIColor colorWithRed:arc4random()%256/255.0 green:arc4random()%256/255.0 blue:arc4random()%256/255.0 alpha:1]];
+            set.valueColors = @[UIColor.blackColor];
+        }
+        [dataSets addObject:set];
+    }
+    
+    dataSetMax = (dataSetMax + dataSetMax * 0.1);
+    
+    self.barChartView.leftAxis.axisMaximum = dataSetMax;
+    self.barChartView.leftAxis.axisMinimum = 0;
+    
+    BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
+    data.barWidth = barWidth;
+    [data groupBarsFromX:-0.5 groupSpace:groupSpace barSpace:barSpace];
+    
+    self.barChartView.data = data;
+    
+    [self.barChartView setVisibleXRangeMaximum:2];
+}
+#pragma mark - StackedData
+- (void)drawStackedData {
+    NSMutableArray *entries = [NSMutableArray array];
+    for (int i = 0; i < self.datas.count; i++) {
+        int total = 0;
+        NSArray *datas = self.datas[i];
+        for (int i = 0; i < datas.count; i ++) {
+            NSString *str = datas[i];
+            total += [str integerValue];
+        }
+        
+        CGFloat num = 0;
+        NSMutableArray *yValues = [NSMutableArray array];
+        for (int i = 0; i < datas.count; i ++) {
+            NSString *str = datas[i];
+            num = [str integerValue] * 100 / (CGFloat)total;
+            [yValues addObject:[NSNumber numberWithFloat:num]];
+        }
+        
+        BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i yValues:yValues];
+        [entries addObject:entry];
+    }
+    
+    BarChartDataSet *set = [[BarChartDataSet alloc] initWithEntries:entries label:@"图例"];
+    set.stackLabels = self.stackLabels;
+    if (self.stackColors.count > 0) {
+        set.colors = self.stackColors;
+    } else {
+        NSMutableArray *colors = [[NSMutableArray alloc] init];
+        [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
+        set.colors = colors;
+    }
+    
+    BarChartData *data = [[BarChartData alloc] initWithDataSet:set];
+    
+    self.barChartView.data = data;
 }
 #pragma mark - data
 - (void)drawData {
     NSMutableArray *entries = [NSMutableArray array];
-    if (self.isStacked) {//堆叠式圆柱
-        for (int i = 0; i < self.datas.count; i++) {
-            int total = 0;
-            NSArray *datas = self.datas[i];
-            for (int i = 0; i < datas.count; i ++) {
-                NSString *str = datas[i];
-                total += [str integerValue];
-            }
-            
-            CGFloat num = 0;
-            NSMutableArray *yValues = [NSMutableArray array];
-            for (int i = 0; i < datas.count; i ++) {
-                NSString *str = datas[i];
-                num = [str integerValue] * 100 / (CGFloat)total;
-                [yValues addObject:[NSNumber numberWithFloat:num]];
-            }
-            
-            BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i yValues:yValues];
-            [entries addObject:entry];
-        }
-    } else {
-        for (int i = 0; i < self.datas.count; i++) {
-            BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i y:[self.datas[i] integerValue]];
-            [entries addObject:entry];
-        }
+    for (int i = 0; i < self.datas.count; i++) {
+        BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i y:[self.datas[i] integerValue]];
+        [entries addObject:entry];
     }
     
     BarChartDataSet *set = [[BarChartDataSet alloc] initWithEntries:entries label:@"图例"];
-    if (set.isStacked) {//堆叠式圆柱
-        set.stackLabels = self.stackLabels;
-        if (self.stackColors.count > 0) {
-            set.colors = self.stackColors;
-        } else {
-            NSMutableArray *colors = [[NSMutableArray alloc] init];
-            [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
-            set.colors = colors;
-        }
-    } else {
-        //圆柱颜色
-        [set setColor:[UIColor cyanColor]];
-    }
+    //圆柱颜色
+    [set setColor:[UIColor cyanColor]];
     
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
     setFormatter.positiveSuffix = @"%";
@@ -433,17 +504,14 @@
     //圆柱和间距的比例，默认0.85
     [data setBarWidth:0.85];
     
-    
     self.barChartView.data = data;
     
-    if (self.titles.count > self.visibleXRangeMaximum) {
-        [self.barChartView setVisibleXRangeMaximum:self.visibleXRangeMaximum];
-    }
+    //设置左右滑动，和xAxis.labelCount配合使用。
+    [self.barChartView setVisibleXRangeMaximum:8];
 }
-
 #pragma mark - IChartAxisValueFormatter
 - (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
-    return self.titles[(int)value % self.titles.count];
+    return self.titles[(int)value];
 }
 #pragma mark ChartViewDelegate
 // 点击

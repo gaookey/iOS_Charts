@@ -202,7 +202,7 @@
     
     //默认0.0
     xAxis.axisRange = 0;
-    //默认NO
+    //限制线。默认NO
     xAxis.drawLimitLinesBehindDataEnabled = NO;
     //抗锯齿功能。默认YES
     xAxis.gridAntialiasEnabled = YES;
@@ -352,7 +352,7 @@
     dataSet.formLineWidth = 50.0;
     //线条的类型。默认linear
     dataSet.mode = LineChartModeLinear;
-    
+
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
     setFormatter.positiveSuffix = @"%";
     //[dataSet setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:setFormatter]];
