@@ -24,12 +24,6 @@
 /// 堆叠式圆柱 图例文字数组
 @property (strong, nonatomic) NSArray *stackLabels;
 
-/// 页面显示圆柱个数
-@property (assign, nonatomic) NSInteger visibleXRangeMaximum;
-
-///maskView
-@property (strong, nonatomic) UIView *maskView;
-
 @end
 
 @implementation GWLBubbleChartViewController
@@ -40,8 +34,6 @@
     self.title = @"BubbleChartView";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.visibleXRangeMaximum = 6;
-    
     [self loadData];
     [self setupBarChartView];
 }
@@ -50,8 +42,8 @@
     self.titles = @[@"12",@"2",@"3",@"4",@"5",@"6.000",@"7",@"8",@"9",@"10",@"11",@"12"];
     self.datas = @[@"11",@"42",@"23",@"42",@"15",@"46.000",@"30",@"8",@"39",@"19",@"31",@"12"];
     
-    //self.titles = @[@"12",@"2"];
-    //self.datas = @[@"11",@"42"];
+//            self.titles = @[@"12",@"2"];
+//            self.datas = @[@"11",@"42"];
 }
 
 #pragma mark - BarChartView
@@ -59,16 +51,6 @@
     [self.view addSubview:self.bubbleChartView];
     
 #pragma mark - 配置
-    
-    //柱状条后面画一个灰色区域，表示最大值。默认NO
-//    self.bubbleChartView.drawBarShadowEnabled = NO;
-//    //显示顶部文字。默认YES
-//    self.bubbleChartView.drawValueAboveBarEnabled = YES;
-//    //在圆柱左右两端各增加一半的条宽。默认NO
-//    self.bubbleChartView.fitBars = NO;
-//    //仅适用于堆叠式(stacked)，当为YES时，点击圆柱时即使只选中了一个堆栈条目，也会高亮整条圆柱。默认NO
-//    self.bubbleChartView.highlightFullBarEnabled = NO;
-    
     //x轴动画
     [self.bubbleChartView animateWithYAxisDuration:1.0f];
     //y轴动画
@@ -119,15 +101,8 @@
     
     //默认NO
     self.bubbleChartView.keepPositionOnRotation = YES;
-    //默认YES
+    //是否有浮层。默认YES
     self.bubbleChartView.drawMarkers = YES;
-    ChartMarkerView *makerView = [[ChartMarkerView alloc] init];
-    makerView.chartView = self.bubbleChartView;
-    self.bubbleChartView.marker = makerView;
-    //自定义的maskView
-    self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 33, 33)];
-    self.maskView.backgroundColor = UIColor.redColor;
-    [makerView addSubview:self.maskView];
     
     
     ChartDescription *chartDescription = [[ChartDescription alloc] init];
@@ -227,12 +202,8 @@
     
     //设置x轴标签显示，例如：设置3则每隔两个柱子显示一个标签。默认1
     xAxis.granularity = 1;
-    //x轴显示数量，默认6
-    if (self.titles.count > self.visibleXRangeMaximum) {
-        xAxis.labelCount = self.visibleXRangeMaximum;
-    } else {
-        xAxis.labelCount = self.titles.count;
-    }
+    //x轴显示数量，和setVisibleXRangeMaximum配合使用。默认6
+    xAxis.labelCount = self.datas.count;
     
     //标签格式化，设置后则titles显示换成0开始的序列号
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
@@ -348,115 +319,24 @@
 #pragma mark - data
 - (void)drawData {
     NSMutableArray *entries = [NSMutableArray array];
-//    if (self.isStacked) {//堆叠式圆柱
-//        for (int i = 0; i < self.datas.count; i++) {
-//            int total = 0;
-//            NSArray *datas = self.datas[i];
-//            for (int i = 0; i < datas.count; i ++) {
-//                NSString *str = datas[i];
-//                total += [str integerValue];
-//            }
-//
-//            CGFloat num = 0;
-//            NSMutableArray *yValues = [NSMutableArray array];
-//            for (int i = 0; i < datas.count; i ++) {
-//                NSString *str = datas[i];
-//                num = [str integerValue] * 100 / (CGFloat)total;
-//                [yValues addObject:[NSNumber numberWithFloat:num]];
-//            }
-//
-//            BarChartDataEntry *entry = [[BarChartDataEntry alloc] initWithX:i yValues:yValues];
-//            [entries addObject:entry];
-//        }
-//    } else {
     for (int i = 0; i < self.datas.count; i++) {
-//        BubbleChartDataEntry *entry = [[BubbleChartDataEntry alloc] initWithX:i y:[self.datas[i] integerValue] size:3 icon:[UIImage imageNamed:@"zan"]];
-                BubbleChartDataEntry *entry = [[BubbleChartDataEntry alloc] initWithX:i y:[self.datas[i] integerValue] size:3];
-
+        BubbleChartDataEntry *entry = [[BubbleChartDataEntry alloc] initWithX:i y:[self.datas[i] integerValue] size:500];
         [entries addObject:entry];
     }
-//    }
     
     BubbleChartDataSet *set = [[BubbleChartDataSet alloc] initWithEntries:entries label:@"图例"];
-//    if (set.isStacked) {//堆叠式圆柱
-//        set.stackLabels = self.stackLabels;
-//        if (self.stackColors.count > 0) {
-//            set.colors = self.stackColors;
-//        } else {
-//            NSMutableArray *colors = [[NSMutableArray alloc] init];
-//            [colors addObjectsFromArray:ChartColorTemplates.vordiplom];
-//            set.colors = colors;
-//        }
-//    } else {
-        //圆柱颜色
-        [set setColor:[UIColor cyanColor]];
-//    }
-    
-    NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
-    setFormatter.positiveSuffix = @"%";
-    [set setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:setFormatter]];
-    //单个高亮显示
-    set.highlightEnabled = YES;
-    //单个高亮显示颜色
-    set.highlightColor = [UIColor purpleColor];
-    //高亮颜色透明度。
-//    set.highlightAlpha = (120.0 / 255.0);
-//    //圆柱边宽。默认0.0
-//    set.barBorderWidth = 0.0;
-//    //圆柱边色。默认black
-//    set.barBorderColor = [UIColor blackColor];
-//    //圆柱阴影色。(red: 215.0/255.0, green: 215.0/255.0, blue: 215.0/255.0, alpha: 1.0)
-//    set.barShadowColor = [UIColor colorWithRed:(215.0/255.0) green:(215.0/255.0) blue:(215.0/255.0) alpha:1.0];
-    //圆柱上是否显示文字
-    set.drawValuesEnabled = YES;
     
     BubbleChartData *data = [[BubbleChartData alloc] initWithDataSet:set];
-    //显示柱状图顶部文字。默认YES
-    [data setDrawValues:YES];
-    [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:[[NSNumberFormatter alloc] init]]];
-    [data setValueTextColor:UIColor.blackColor];
-    //柱状图顶部文字大小
-    [data setValueFont:[UIFont systemFontOfSize:10]];
-    //圆柱和间距的比例，默认0.85
-//    [data setBarWidth:0.85];
-    
     
     self.bubbleChartView.data = data;
     
-    if (self.titles.count > self.visibleXRangeMaximum) {
-        [self.bubbleChartView setVisibleXRangeMaximum:self.visibleXRangeMaximum];
-    }
+    [self.bubbleChartView setVisibleXRangeMaximum:self.datas.count];
 }
 
 //#pragma mark - IChartAxisValueFormatter
 - (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis {
-    return self.titles[(int)value % self.titles.count];
+    return self.titles[(int)value];
 }
-//#pragma mark ChartViewDelegate
-//// 点击
-//-(void)chartValueSelected:(ChartViewBase *)chartView entry:(ChartDataEntry *)entry highlight:(ChartHighlight *)highlight {
-//    NSLog(@"点击了 %f - %f", entry.x, entry.y);
-//}
-//// 停止在图表上的值之间移动
-//- (void)chartViewDidEndPanning:(ChartViewBase *)chartView {
-//
-//}
-//// 没有选择任何内容或取消选择
-//- (void)chartValueNothingSelected:(ChartViewBase *)chartView {
-//
-//}
-//// 缩放图表
-//- (void)chartScaled:(ChartViewBase *)chartView scaleX:(CGFloat)scaleX scaleY:(CGFloat)scaleY {
-//
-//}
-//// 拖动手势移动/转换图表
-//- (void)chartTranslated:(ChartViewBase *)chartView dX:(CGFloat)dX dY:(CGFloat)dY {
-//
-//}
-//// 停止动画
-//- (void)chartView:(ChartViewBase *)chartView animatorDidStop:(ChartAnimator *)animator {
-//
-//}
 
 #pragma mark - lazy
 - (BubbleChartView *)bubbleChartView {

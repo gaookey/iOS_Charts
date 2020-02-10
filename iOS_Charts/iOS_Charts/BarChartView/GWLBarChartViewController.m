@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, BarChartViewType) {
     
     //默认NO
     self.barChartView.keepPositionOnRotation = YES;
-    //默认YES
+    //是否有浮层。默认YES
     self.barChartView.drawMarkers = YES;
     ChartMarkerView *makerView = [[ChartMarkerView alloc] init];
     makerView.chartView = self.barChartView;

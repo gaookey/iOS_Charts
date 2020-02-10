@@ -351,7 +351,7 @@
     dataSet.lineWidth = 1.0;
     dataSet.formLineWidth = 50.0;
     //线条的类型。默认linear
-    dataSet.mode = LineChartModeLinear;
+    dataSet.mode = LineChartModeHorizontalBezier;
 
     NSNumberFormatter *setFormatter = [[NSNumberFormatter alloc] init];
     setFormatter.positiveSuffix = @"%";
